@@ -1,22 +1,32 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star } from "lucide-react";
+import { Heart, Sparkles, Star, Volume2, VolumeX } from "lucide-react";
 import { toast } from "sonner";
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLetter, setShowLetter] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const [hearts, setHearts] = useState<{ id: number; x: number; y: number; size: number; delay: number }[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [glitters, setGlitters] = useState<{ id: number; x: number; y: number; size: number; delay: number }[]>([]);
 
-  // Handle envelope opening
   const handleEnvelopeClick = () => {
     if (isOpen) return;
     
     setIsOpen(true);
+    if (audioRef.current) {
+      audioRef.current.play().catch(error => {
+        console.log("Audio playback failed:", error);
+        toast("Click anywhere to enable music! 🎵", {
+          description: "Browser requires user interaction first",
+          duration: 5000,
+        });
+      });
+    }
+    
     setTimeout(() => {
       setShowLetter(true);
     }, 1000);
@@ -32,7 +42,13 @@ const Index = () => {
     }, 3000);
   };
 
-  // Generate hearts animation
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !audioRef.current.muted;
+      setIsMuted(!isMuted);
+    }
+  };
+
   const generateHearts = () => {
     const newHearts = [];
     const containerWidth = containerRef.current?.offsetWidth || 600;
@@ -50,7 +66,6 @@ const Index = () => {
     setHearts(newHearts);
   };
 
-  // Create glitter effect
   const createGlitterEffect = () => {
     const newGlitters = [];
     const containerWidth = containerRef.current?.offsetWidth || 600;
@@ -69,7 +84,6 @@ const Index = () => {
     setGlitters(newGlitters);
   };
 
-  // Mouse move glitter effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current || !isOpen) return;
     
@@ -97,6 +111,21 @@ const Index = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
     >
+      <audio ref={audioRef} loop>
+        <source src="/path-to-your-music.mp3" type="audio/mpeg" />
+      </audio>
+
+      <motion.button
+        className="fixed top-4 right-4 z-50 bg-white/80 p-2 rounded-full shadow-md hover:bg-white/90 transition-colors"
+        onClick={toggleMute}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isOpen ? 1 : 0 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        {isMuted ? <VolumeX size={20} className="text-love" /> : <Volume2 size={20} className="text-love" />}
+      </motion.button>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -122,7 +151,6 @@ const Index = () => {
         </motion.p>
       </motion.div>
 
-      {/* Sparkle decorations */}
       <motion.div 
         className="absolute top-20 left-1/4 transform -translate-x-1/2 text-gold-dark opacity-75"
         animate={{ rotate: 360 }}
@@ -139,9 +167,7 @@ const Index = () => {
         <Star size={24} />
       </motion.div>
 
-      {/* Main envelope container */}
       <div className="envelope-container relative w-full max-w-md mx-auto">
-        {/* Envelope body */}
         <motion.div 
           className={`relative bg-love-light border-2 border-love rounded-md p-4 aspect-[4/3] shadow-lg`}
           whileHover={!isOpen ? { scale: 1.02 } : {}}
@@ -149,12 +175,10 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          {/* Envelope lid */}
           <div 
             className={`envelope-lid absolute top-0 left-0 w-full h-1/2 bg-love border-2 border-love rounded-t-md z-20 ${isOpen ? 'open' : ''}`}
             style={{ transformOrigin: 'top' }}
           >
-            {/* Button on envelope */}
             {!isOpen && (
               <motion.button 
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
@@ -170,7 +194,6 @@ const Index = () => {
             )}
           </div>
 
-          {/* Letter */}
           <div 
             className={`letter absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[120%] 
                        bg-white rounded-md p-6 shadow-md z-10 ${showLetter ? 'show' : ''}`}
@@ -199,16 +222,13 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Envelope inside (visible when open) */}
           <div className="absolute inset-0 bg-gradient-to-b from-pink-100 to-love-light rounded-md"></div>
           
-          {/* Envelope back flap (visible when open) */}
           <div className="absolute top-0 left-0 w-full h-1/2 bg-love-light rounded-t-md transform -translate-y-[99%] z-0"
                 style={{ display: isOpen ? 'block' : 'none' }}></div>
         </motion.div>
       </div>
 
-      {/* Flying hearts */}
       {showHearts && hearts.map((heart) => (
         <motion.div
           key={heart.id}
@@ -241,7 +261,6 @@ const Index = () => {
         </motion.div>
       ))}
 
-      {/* Glitter effect */}
       {showHearts && glitters.map((glitter) => (
         <motion.div
           key={glitter.id}
@@ -271,7 +290,6 @@ const Index = () => {
         />
       ))}
 
-      {/* Footer message */}
       <motion.p 
         className="mt-16 text-center text-muted-foreground text-sm opacity-75 max-w-xs"
         initial={{ opacity: 0 }}
