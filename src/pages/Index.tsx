@@ -172,26 +172,26 @@ const Index = () => {
 
           {/* Letter */}
           <div 
-            className={`letter absolute top-1/2 left-1/2 transform -translate-x-1/2 w-[90%] h-[120%] 
+            className={`letter absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[120%] 
                        bg-white rounded-md p-6 shadow-md z-10 ${showLetter ? 'show' : ''}`}
           >
-            <div className="h-full overflow-y-auto">
-              <div className="flex flex-col h-full justify-between">
+            <div className="h-full overflow-y-auto flex items-center justify-center">
+              <div className="flex flex-col justify-between w-full">
                 <div>
-                  <h2 className="cursive text-3xl text-love-dark mb-4">My Dearest Positron,</h2>
+                  <h2 className="cursive text-3xl text-love-dark mb-4 text-center">My Dearest Positron,</h2>
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
-                    <p>
+                    <p className="text-center">
                       Wishing you a very happy Birthday my positron. Thanks for always being there and encouraging me, supporting me in every endeavour.
                     </p>
-                    <p>
+                    <p className="text-center">
                       Ik we don't talk like others do, but it's alright. I can wait, if it's for you.
                     </p>
-                    <p>
+                    <p className="text-center">
                       Be chill and enjoy the day to its fullest. Wishing you a lots of happiness and wishing us, loads of conversations, meets and memories ahead!
                     </p>
                   </div>
                 </div>
-                <div className="mt-6">
+                <div className="mt-6 text-center">
                   <p className="cursive text-2xl text-rose-dark">Happy Birthday once again,</p>
                   <p className="cursive text-2xl text-love-dark mt-2">Love ya ❤️</p>
                 </div>
