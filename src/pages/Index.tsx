@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Heart, Sparkles, Star, Volume2, VolumeX } from "lucide-react";
