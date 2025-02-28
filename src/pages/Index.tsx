@@ -216,12 +216,12 @@ const Index = () => {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 1.5 }}
           >
-            {/* Moving the message above the cake */}
+            {/* Moving the message further up from the cake */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="mb-16 text-center"
+              className="mb-24 text-center" // Increased bottom margin from 16 to 24
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-love-dark relative inline-block">
                 <span className="relative z-10">
@@ -236,11 +236,11 @@ const Index = () => {
               </h1>
             </motion.div>
             
-            {/* Cake */}
+            {/* Enhanced cake with more decorations */}
             <div className="relative mx-auto w-64 h-40 bg-rose-light rounded-b-3xl rounded-t-lg shadow-lg overflow-visible">
-              {/* Cake layers */}
+              {/* Cake layers with gradient */}
               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-rose-light to-rose rounded-b-3xl rounded-t-lg">
-                {/* Frosting */}
+                {/* Frosting with enhanced design */}
                 <div className="absolute -top-4 left-0 w-full h-8 bg-white">
                   <div className="absolute top-0 w-full">
                     <div className="flex justify-evenly">
@@ -255,20 +255,48 @@ const Index = () => {
                   </div>
                 </div>
                 
-                {/* Decorations */}
-                <div className="absolute bottom-4 w-full flex justify-center space-x-2">
+                {/* Cake texture - horizontal lines */}
+                <div className="absolute inset-x-0 top-1/4 h-px bg-rose-dark/20"></div>
+                <div className="absolute inset-x-0 top-2/4 h-px bg-rose-dark/20"></div>
+                <div className="absolute inset-x-0 top-3/4 h-px bg-rose-dark/20"></div>
+                
+                {/* Sprinkles randomly positioned on cake */}
+                {Array.from({ length: 20 }).map((_, i) => (
+                  <div 
+                    key={i}
+                    className="absolute w-1 h-1 rounded-full"
+                    style={{
+                      backgroundColor: ['#FFD566', '#FF8F82', '#FF719A', '#FFA99F'][Math.floor(Math.random() * 4)],
+                      left: `${Math.random() * 90 + 5}%`,
+                      top: `${Math.random() * 70 + 15}%`
+                    }}
+                  />
+                ))}
+                
+                {/* Bottom decorations */}
+                <div className="absolute bottom-4 w-full flex justify-center space-x-3">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <div key={i} className="w-3 h-3 bg-love rounded-full" />
+                    <div key={i} className="w-3 h-3 bg-love rounded-full shadow-sm" />
                   ))}
                 </div>
                 
+                {/* Middle decorations - larger dots */}
                 <div className="absolute top-1/3 w-full flex justify-center space-x-4">
                   {Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="w-4 h-4 bg-gold-light rounded-full" />
+                    <div 
+                      key={i} 
+                      className="w-4 h-4 rounded-full shadow-sm"
+                      style={{ backgroundColor: i % 2 === 0 ? '#FFD566' : '#FF8F82' }} 
+                    />
                   ))}
                 </div>
                 
-                {/* Candles */}
+                {/* Happy Birthday text on cake */}
+                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center">
+                  <p className="text-xs font-bold text-rose-dark/70 cursive">Happy Birthday</p>
+                </div>
+                
+                {/* Candles with enhanced design */}
                 <div className="absolute -top-12 w-full flex justify-center items-end">
                   {candles.map((candle) => (
                     <div 
@@ -279,8 +307,14 @@ const Index = () => {
                       }`}
                       id={`candle-${candle.id}`}
                     >
-                      {/* Candle stick */}
-                      <div className="w-2 h-16 bg-blue-100 rounded-sm z-10" />
+                      {/* Candle stick with color and stripes */}
+                      <div className="w-2 h-16 bg-gradient-to-b from-blue-200 to-blue-100 rounded-sm z-10 relative overflow-hidden">
+                        {/* Decorative stripes on candles */}
+                        <div className="absolute top-2 inset-x-0 h-0.5 bg-blue-300/50"></div>
+                        <div className="absolute top-6 inset-x-0 h-0.5 bg-blue-300/50"></div>
+                        <div className="absolute top-10 inset-x-0 h-0.5 bg-blue-300/50"></div>
+                        <div className="absolute top-14 inset-x-0 h-0.5 bg-blue-300/50"></div>
+                      </div>
                       
                       {/* Candle flame */}
                       {candle.isLit && (
@@ -290,6 +324,9 @@ const Index = () => {
                           aria-label="Blow out candle"
                         >
                           <div className="relative w-full h-full">
+                            {/* Flame glow effect */}
+                            <div className="absolute -inset-2 bg-gold-light/20 rounded-full filter blur-md"></div>
+                            
                             {/* Outer flame */}
                             <motion.div 
                               className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-8 bg-gold-light rounded-full oval"
@@ -323,8 +360,8 @@ const Index = () => {
                 </div>
               </div>
               
-              {/* Cake base/plate */}
-              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-72 h-4 bg-gray-200 rounded-full shadow-md"></div>
+              {/* Enhanced cake base/plate with shadow and gradient */}
+              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-72 h-4 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded-full shadow-md"></div>
             </div>
             
             {/* Instructions */}
