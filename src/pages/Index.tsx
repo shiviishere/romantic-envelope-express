@@ -192,37 +192,6 @@ const Index = () => {
         {isMuted ? <VolumeX size={20} className="text-love" /> : <Volume2 size={20} className="text-love" />}
       </motion.button>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="mb-10 text-center"
-      >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-love-dark relative inline-block">
-          <span className="relative z-10">
-            {showMessage ? "Happy Birthday" : "Make a Wish!"}
-          </span>
-          <motion.div 
-            className="absolute -bottom-2 left-0 h-3 bg-gold-light/70 w-full -z-0 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-          />
-        </h1>
-        <AnimatePresence>
-          {showMessage && (
-            <motion.p 
-              className="mt-4 cursive text-2xl md:text-3xl text-rose-dark"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            >
-              My Beloved
-            </motion.p>
-          )}
-        </AnimatePresence>
-      </motion.div>
-
       <motion.div 
         className="absolute top-20 left-1/4 transform -translate-x-1/2 text-gold-dark opacity-75"
         animate={{ rotate: 360 }}
@@ -247,6 +216,26 @@ const Index = () => {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 1.5 }}
           >
+            {/* Moving the message above the cake */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-16 text-center"
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-love-dark relative inline-block">
+                <span className="relative z-10">
+                  Make a Wish!
+                </span>
+                <motion.div 
+                  className="absolute -bottom-2 left-0 h-3 bg-gold-light/70 w-full -z-0 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                />
+              </h1>
+            </motion.div>
+            
             {/* Cake */}
             <div className="relative mx-auto w-64 h-40 bg-rose-light rounded-b-3xl rounded-t-lg shadow-lg overflow-visible">
               {/* Cake layers */}
@@ -353,34 +342,63 @@ const Index = () => {
 
       <AnimatePresence>
         {showMessage && (
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="w-full max-w-md mx-auto bg-white rounded-md p-6 shadow-md"
-            style={{ maxHeight: "80vh", overflowY: "auto" }}
-          >
-            <div className="flex flex-col justify-between w-full">
-              <div>
-                <h2 className="cursive text-3xl text-love-dark mb-4 text-center">My Dearest Positron,</h2>
-                <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
-                  <p className="text-center">
-                    Wishing you a very happy Birthday my positron. Thanks for always being there and encouraging me, supporting me in every endeavour.
-                  </p>
-                  <p className="text-center">
-                    Ik we don't talk like others do, but it's alright. I can wait, if it's for you.
-                  </p>
-                  <p className="text-center">
-                    Be chill and enjoy the day to its fullest. Wishing you a lots of happiness and wishing us, loads of conversations, meets and memories ahead!
-                  </p>
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-10 text-center"
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-love-dark relative inline-block">
+                <span className="relative z-10">
+                  Happy Birthday
+                </span>
+                <motion.div 
+                  className="absolute -bottom-2 left-0 h-3 bg-gold-light/70 w-full -z-0 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                />
+              </h1>
+              <motion.p 
+                className="mt-4 cursive text-2xl md:text-3xl text-rose-dark"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                My Beloved
+              </motion.p>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="w-full max-w-md mx-auto bg-white rounded-md p-6 shadow-md"
+              style={{ maxHeight: "80vh", overflowY: "auto" }}
+            >
+              <div className="flex flex-col justify-between w-full">
+                <div>
+                  <h2 className="cursive text-3xl text-love-dark mb-4 text-center">My Dearest Positron,</h2>
+                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
+                    <p className="text-center">
+                      Wishing you a very happy Birthday my positron. Thanks for always being there and encouraging me, supporting me in every endeavour.
+                    </p>
+                    <p className="text-center">
+                      Ik we don't talk like others do, but it's alright. I can wait, if it's for you.
+                    </p>
+                    <p className="text-center">
+                      Be chill and enjoy the day to its fullest. Wishing you a lots of happiness and wishing us, loads of conversations, meets and memories ahead!
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="cursive text-2xl text-rose-dark">Happy Birthday once again,</p>
+                  <p className="cursive text-2xl text-love-dark mt-2">Love ya ❤️</p>
                 </div>
               </div>
-              <div className="mt-6 text-center">
-                <p className="cursive text-2xl text-rose-dark">Happy Birthday once again,</p>
-                <p className="cursive text-2xl text-love-dark mt-2">Love ya ❤️</p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
