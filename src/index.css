@@ -137,14 +137,15 @@
   100% { transform: rotateX(180deg); }
 }
 
+/* Adjusted to move the letter up just enough to be fully visible */
 @keyframes letter-rise {
-  0% { transform: translate(-50%, -50%) translateY(0); }
-  100% { transform: translate(-50%, -50%) translateY(-50px); }
+  0% { transform: translate(-50%, 0); }
+  100% { transform: translate(-50%, -20%); }
 }
 
 @keyframes letter-unfold {
-  0% { transform: translate(-50%, -50%) translateY(-50px) scaleY(0.9); }
-  100% { transform: translate(-50%, -50%) translateY(-50px) scaleY(1); }
+  0% { transform: translate(-50%, -20%) scaleY(0.9); }
+  100% { transform: translate(-50%, -20%) scaleY(1); }
 }
 
 .sparkle {
